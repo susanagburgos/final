@@ -41,7 +41,11 @@
     socket.on('sendShape', function(num){
       hideShape(num);
     }); 
-    
+
+    socket.on('sendWinner', function(player) {
+      alert(colors[player] + ' won! Refresh the page to play again.');
+      canMove = false;
+    }); 
   </script>
 
   <style> 
@@ -52,10 +56,11 @@
   }
   canvas#defaultCanvas0 {
     display: block;
-    margin: 0 auto;
+    margin: 05% auto;
     border-style: solid;
+    border-color: silver;
     border-width: 5px;
-}
+  }
   
   </style>
 </head>

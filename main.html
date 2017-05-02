@@ -4,41 +4,51 @@
   <link rel="shortcut icon" href="">
 
   <!-- TEXT STUFF -->
-  <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <script type="text/javascript"></script>
 
   <style> 
 
+    @font-face {
+      font-family: 'happy_brown_catregular';
+      src: url('webfontkit-20170501-201607/happy_brown_cat-webfont.woff2') format('woff2'),
+           url('webfontkit-20170501-201607/happy_brown_cat-webfont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     h1 {
-      font-family: 'Fredoka One', Helvetica, cursive; 
+      font-family: 'happy_brown_catregular', Helvetica, cursive; 
       font-size: 350%;
+      opacity: 0.5;
     }
 
     h2 {
-      margin-left: -85px;
+      margin-left: 10px;
       margin-top: -26px;
       padding-bottom: 25px;
+      font-family: 'Open Sans', sans-serif;
     }
 
     body {
       padding: 0; 
-      margin: 0;
-      font-family: 'Open Sans', sans-serif; 
+      margin: 0; 
     }
 
     .container {
       margin-top: 15%;
-      margin-left: 45%;
+      margin-left: 05%;
     }
 
     button {
-      background: rgb(0, 0, 0);
+      background: white;
       font-family: 'Open Sans', sans-serif; 
       font-style: bold; 
       font-size: 150%;
-      color: white;
+      color: darksalmon;
       border-style: none;
-      border-radius: 5px;
+      border-color: silver;
+      border-radius: 2px;
       margin-left: 3%;
       text-decoration: none;
       padding: 10px 20px 10px 20px; 
@@ -48,13 +58,30 @@
       background: rgba(0, 0, 0, .6);
     }
 
+    li::marker {
+      color: red;
+    }
+
+    li {
+      color: ;
+    }
+
   </style>
 </head>
 
 <body>
   <div class="container"> 
-    <h1> DOTS </h1> 
-    <h2> be the first one to get them all </h2>
+    <h1> Hungry, Hungry Circles </h1> 
+    <h2> 
+      <ul> 
+           <li style="color: darksalmon;"><span style="color: rgba(0,0,0,0.6);">You need four players to start</span></li>
+           <li style="color: mediumaquamarine;"><span style="color: rgba(0,0,0,0.6);">Try and eat all the shapes of your same color </span></li>
+           <li style="color: thistle;"><span style="color: rgba(0,0,0,0.6);">If you eat the wrong color, you will  be sent back to the starting position </span>
+            <ul><li> <span style="color: rgba(0,0,0,0.6);">If you have eaten any of your same colored shapes a new one will regenerate</li></ul></span>
+            </li>
+            <li style="color: khaki;"><span style="color: rgba(0,0,0,0.6);">Whoever collects all the shapes of their same color first wins</span></li>
+      </ul>
+    </h2>
     <button onclick="location.href='138.197.215.239:8080/index.html'" type="button"> play </button>
   </div>
 </body>

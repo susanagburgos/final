@@ -1,12 +1,13 @@
 // P5 STUFF
 var shapes=[];
-var colors=['blue', 'red', 'green', 'yellow'];
+var colors=['darksalmon', 'mediumaquamarine', 'thistle', 'khaki'];
 var playerNumber; 
 var locY;
 var locX;
 var playerCount = 1;
 var scoreArray= [8, 8, 8, 8];
 var int;
+var canMove = true;
 
 
 
@@ -23,34 +24,41 @@ function draw() {
 
 	for (var i = 0; i < playerCount; i++) {
 		// console.log('draw players'+ i);
-		stroke("black");
+		stroke("silver");
 		strokeWeight(3);
 		fill(colors[i]);
 		ellipse(locX[i], locY[i], 30);
 	
 	}
 
-	if(keyIsDown(LEFT_ARROW)){
+	if(keyIsDown(LEFT_ARROW) && canMove){
 		locX[playerNumber-1] = (locX[playerNumber-1] - 3);
 
-		if(locX[playerNumber-1] < 30) {
-			locX[playerNumber-1] = 30; 
-			// user will turn the other way around at same speed
+		if(locX[playerNumber-1] < 0) {
+			// user will be stopped at edge
+			locX[playerNumber-1] = 25; 
 		}
 	} 
-	if(keyIsDown(RIGHT_ARROW)){
+	if(keyIsDown(RIGHT_ARROW) && canMove){
 		locX[playerNumber-1] = (locX[playerNumber-1]+ 3);
 
-		if(locX[playerNumber-1] > 470) {
-			locX[playerNumber-1] = 470; 
-			// user will turn the other way around at same speed
+		if(locX[playerNumber-1] > 500) {
+			locX[playerNumber-1] = 475; 
 		}
 	}
-	if(keyIsDown(UP_ARROW)){
+	if(keyIsDown(UP_ARROW) && canMove){
 		locY[playerNumber-1] = (locY[playerNumber-1] - 3);
+
+		if(locY[playerNumber-1] < 0) {
+			locY[playerNumber-1] = 25; 
+		}
 	}
-	if(keyIsDown(DOWN_ARROW)){
+	if(keyIsDown(DOWN_ARROW) && canMove){
 		locY[playerNumber-1] = (locY[playerNumber-1] + 3);
+
+		if(locY[playerNumber-1] > 600) {
+			locY[playerNumber-1] = 575; 
+		}
 	}
 
 	for(var i=0; i< shapes.length; i++){
@@ -68,7 +76,7 @@ function init(){
 
 function getPlayerNumber(data){
 	playerNumber = data;
-	alert('You are player ' + colors[playerNumber-1] + '. Eat as many shapes of the same color!');
+	alert('You are player ' + colors[playerNumber-1] + '. Eat as many shapes of your same color. Beware of other colors!');
 	// textSize(32);
 	// text("You are the " + colors[playerCount-1]+ "player");
 	// fill(0, 102, 153);
@@ -164,9 +172,9 @@ function hideShape(num) {
 		scoreArray[i]--;
 		console.log( "player: " + (i+1) + " score subtract:" + scoreArray[i]);
 
-		if(scoreArray[i] == 0) {
-			alert(colors[i] + " won!");	
-		}
+		// if(scoreArray[i] == 0) {
+		// 	alert(colors[i] + " won!");	
+		// }
 	}
 }
 
@@ -218,15 +226,24 @@ function add(i){
 }
 
 function subtract(i, num){
-	scoreArray[i]--;
-
-	console.log( "player: " + (i+1) + " score subtract:" + scoreArray[i]);
-
+	// sending captured shape info to everyone
 	socket.emit('gotShape', num); 
 
+	scoreArray[i]--;
+
+	// // i is the player
+	// socket.emit('alertMe', i);
+
 	if(scoreArray[i] == 0) {
-		alert(colors[i] + " won!");	
+		// alert(colors[i] + " won!");
+		// location.reload();
+		// io.sockets.emit is giving error	
+		socket.emit('alertMe', i);
+		// do we need a socket emit for message? 
+		console.log("color of winner" + colors[i]);
 	}
+
+	console.log( "player: " + (i+1) + " score subtract:" + scoreArray[i]);
 }
 
 

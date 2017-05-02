@@ -100,8 +100,35 @@ io.sockets.on('connection',
 			io.to(thisRoom).emit('sendShape', num); 
 		});
 
+		socket.on('alertMe', function(player) {
+
+			// io.to(thisRoom).emit('sendWinner', player);
+			gameOver(thisRoom, player);
+			// if(scoreArray[player] == 0) {
+			// 	alert(colors[player] + " won!");
+			// 	// location.reload();	
+				
+			// 	// do we need a socket emit for message? 
+			// 	console.log("color of winner" + colors[player]);
+
+			// 	io.to(thisRoom).emit('sendWinner', player);
+			// }
+
+		});
+
 		socket.on('disconnect', function() {
 			console.log("Client has disconnected " + socket.id);
 		});
 	}
 );
+
+
+function gameOver(room, player) {
+	io.to(room).emit('sendWinner', player);
+	
+}
+
+
+
+
+
